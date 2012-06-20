@@ -2,6 +2,10 @@
 
 Since jekyll generates static sites, having dynamic search is nearly impossible without using a third-party service of some kind. This project aims to fix that, by using a jekyll plugin to generate a full-text index of your site that can be searched against via a jQuery script. 
 
+# License
+
+This project is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+
 # Requirements
 
 Ruby Gems:
