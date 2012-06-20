@@ -16,6 +16,21 @@ If you're running jekyll in safe mode (ie. Github's pages), you'll need to gener
 
 # Example
 
+Generate the search.json file by adding the gensearch.rb file to your plugins and running jekyll:
+
+<pre>
+$ jekyll 
+Configuration from /path/to/your/site/_config.yml
+Building site: /path/to/your/site -> ./_site
+Generating search data for 4022 words
+Successfully generated site: /path/to/your/site -> ./_site
+
+$ ls -lh search.json 
+-rw-r--r--. 1 root root 330K Jun 20 16:30 search.json
+</pre>
+
+My site is currently that many words (across a few hundred pages), resulting in a search index approximately 1/3 MB.
+
 Add jQuery and the search.js script:
 
 <pre>
