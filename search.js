@@ -21,6 +21,8 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 // flag for searching, to help prevent multiple concurrent searches
 var searching = false;
+// results of search, stored globaly
+var final_results = [];
 
 // helper function, enables/disables anything with 
 // the class "search" so people don't double tap
@@ -40,10 +42,12 @@ function getkeys(obj) {
     return keys;
 }
 
-function run_search() {
+function run_search(search_callback) {
   if (!searching && $.trim($("#searchbox").val()) != "") {
     // don't let multiples run at the same time
     searching = true;
+    // clear the final results variable
+    final_results = [];
     // disable the input/button 
     set_search_enabled(false);
     // and go...
@@ -113,14 +117,14 @@ function run_search() {
          }
       });
 
-      // now create the array we'll return that 
-      // has all the sorted entries in it
-      final_results = []
+      // fill up the array of results with the entries
+      // with the highest scores first
       $.each(keys, function(idx,key) {
         final_results.push(results[key]);
       });
 
-      return final_results;
+      // run the callback function
+      search_callback()
     }).success(function() {
     }).error(function() { 
     }).complete(function() { 

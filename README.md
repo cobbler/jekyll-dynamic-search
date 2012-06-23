@@ -55,7 +55,10 @@ Add a little more javascript to display the results:
 
 <pre>
 function doSearch() {
-  results = run_search();
-  &lt;.. do something ..&gt;
+  run_search(function doit() {
+    &lt;.. do something ..&gt;
+  });
 }
 </pre>
+
+The run_search function takes a callback, which is run if the AJAX call is successful.
