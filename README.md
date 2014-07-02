@@ -12,7 +12,7 @@ Ruby Gems:
 * JSON
 * Ferret (indexing)
 
-JQuery &gt;= 1.6	
+JQuery >= 1.6	
 
 # Caveats
 
@@ -22,7 +22,7 @@ If you're running jekyll in safe mode (ie. Github's pages), you'll need to gener
 
 Generate the search.json file by adding the gensearch.rb file to your plugins and running jekyll:
 
-<pre>
+```bash
 $ jekyll 
 Configuration from /path/to/your/site/_config.yml
 Building site: /path/to/your/site -> ./_site
@@ -31,34 +31,37 @@ Successfully generated site: /path/to/your/site -> ./_site
 
 $ ls -lh search.json 
 -rw-r--r--. 1 root root 330K Jun 20 16:30 search.json
-</pre>
+```
 
 My site is currently that many words (across a few hundred pages), resulting in a search index approximately 1/3 MB.
 
 Add jQuery and the search.js script:
 
-<pre>
-&lt;script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/javascript" src="/scripts/search.js"&gt;&lt;/script&gt;
-</pre>
+```html
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/search.js"></script>
+```
 
 Add a search box and button:
 
-<pre>
-&lt;div id="searchdiv"&gt;
- &lt;input id="searchbox" class="search" type="text" /&gt;
- &lt;input id="searchbutton" class="search" type="button" value="search" onclick="javascript:doSearch();" /&gt;
-&lt;/div&gt;
-</pre>
+```html
+<div id="searchdiv">
+ <input id="searchbox" class="search" type="text" />
+ <input id="searchbutton" class="search" type="button" value="search" onclick="javascript:doSearch();" />
+</div>
+```
 
-Add a little more javascript to display the results:
+Add a little more javascript to display the results (results are stored in the `final_results` global var):
 
-<pre>
+```javascript
 function doSearch() {
-  run_search(function doit() {
-    &lt;.. do something ..&gt;
+  run_search(function() {
+    //.. do something ..
+    for (var i = 0, len = final_results.length; i < len; i++) {
+      console.log(final_results[i].u + ': ' + final_results[i].t);
+    }
   });
 }
-</pre>
+```
 
 The run_search function takes a callback, which is run if the AJAX call is successful.
